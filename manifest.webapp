@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "name": "My App",
+  "description": "My elevator pitch goes here",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/128.png"
+  },
+  "developer": {
+    "name": "tinda",
+    "url": "http://your-homepage-here.org"
+  },
+  "messages": [
+    { "alarm": "/index2.html" },
+    { "notification": "/index.html" } 
+  ],
+  "permissions": {
+    "alarms": {
+        "description": "Required to notify timer's end"
+    },
+    "desktop-notification":{
+        "description": "Required to notify timer's end"
+    }
+  },
+  "default_locale": "en"
+  
+  
+}

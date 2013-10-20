@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title></title>
+    <style>
+        .queue {
+            margin: 0;
+            padding: 0;
+        }
+        .debug {
+            background: cyan;
+            margin: 1em 0;
+            padding: 5px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="console"></div>
+    <div class="debug"></div>
+    <ul class="queue"></ul>
+    <button class="add">add</button>
+    <button class="clear">Clear All</button>
+    <script>
+(function() {
+
+function $(selector) {
+    return [].slice.call(document.querySelectorAll(selector));
+}
+
+window.addEventListener('keydown', function(e) {
+    if (e.keyCode == 82 && e.metaKey) {
+        window.location.reload();
+    }
+});
+
+if (!navigator.mozAlarms) {
+    return;
+}
+
+function getAll() {
+    var reqAlarms = navigator.mozAlarms.getAll();
+    reqAlarms.onsuccess = function (e) {
+        var HTML = '';
+        e.target.result.forEach(function(v, k) {
+            HTML += '<li>' + JSON.stringify(v) + '</li>';
+        });
+        $('.queue')[0].innerHTML = HTML;
+    };
+    reqAlarms.onerror = function (e) {
+        $('.console')[0].innerHTML = e.target.error.name;
+    };
+}
+
+$('.clear')[0].addEventListener('click', function(e) {
+    e.preventDefault();
+
+    var reqClearAlarms = navigator.mozAlarms.getAll();
+    reqClearAlarms.onsuccess = function (e) {
+        e.target.result.forEach(function(v, k) {
+            //if (v.data && v.data.src === 'daddy') {
+                navigator.mozAlarms.remove(v.id);
+            //}
+        });
+        $('.queue')[0].innerHTML = '';
+        $('.console')[0].innerHTML = 'Alarms cleared';
+    };
+    reqClearAlarms.onerror = function (e) {
+        $('.console')[0].innerHTML = e.target.error.name;
+    };
+});
+
+// navigator.mozSetMessageHandler('alarm', function (message) {
+//     console.log('alarm fired:', message);
+//     $('.debug')[0].innerHTML += '<p>alarm fired: ' + JSON.stringify(message) + '</p>';
+// });
+
+navigator.mozSetMessageHandler("alarm", function(mozAlarm) {
+                navigator.vibrate(2000);
+        
+                var notification = navigator.mozNotification.createNotification('There you go', mozAlarm.data.label);
+                    notification.show();
+        
+                });
+
+$('.add')[0].addEventListener('click', function(e) {
+
+var now = new Date();
+var v = new Date();
+v.setSeconds(now.getSeconds() + 5);
+
+var request = navigator.mozAlarms.add(v, 'ignoreTimezone', {src: 'daddy', from: 'cvan'});
+request.onsuccess = function (e) {
+    $('.console')[0].innerHTML = 'Success | ' + JSON.stringify(e.target.result);
+    getAll();
+};
+request.onerror = function (e) {
+    $('.console')[0].innerHTML = 'Errors | ' + e.target.error.name;
+    getAll();
+};
+
+});
+
+})();
+    </script>
+  </body>
+</html>
