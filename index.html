@@ -25,7 +25,7 @@
 <script>
 function startTime()
 {
-
+  
 var today=new Date();
 var h=today.getHours();
 var m=today.getMinutes();
@@ -35,44 +35,40 @@ m=checkTime(m);
 s=checkTime(s);
 document.getElementById('txt').innerHTML=h+":"+m+":"+s;
 t=setTimeout(function(){startTime()},500);
-timeto();
 }
 
 function checkTime(i)
 {
+  navigator.mozSetMessageHandler(
+    "alarm",
+    function (msg) {
+        alert(JSON.stringify(msg));
+      }
+);
+  
 if (i<10)
   {
   i="0" + i;
   }
 return i;
 }
-function timeto(){
-    var now = new Date();
-    
-    if (navigator.mozAlarms) {
-      document.getElementById('t2').innerHTML="now = "+now;
-      navigator.mozHasPendingMessage("alarm");
-      navigator.mozSetMessageHandler("alarm", function(mozAlarm) {
-      navigator.vibrate(2000);
-        
-      var notification = navigator.mozNotification.createNotification('There you go', mozAlarm.data.label);
-        notification.show();
-        
-    });
-}else{
-  return false;
-}
-  }
+
 </script>
 <body onload="startTime()" >
 <!-- Home -->
 <div data-role="page" id="page1">
     <div data-role="content">
-        <h2 id="t">
-            hello world
+        <h2 id="t0">
+            t0 hello world
+        </h2>
+        <h2 id="t1">
+            t1 hello world
         </h2>
         <h2 id="t2">
-            hello world
+            t2 hello world
+        </h2>
+        <h2 id="t3">
+            t3 hello world
         </h2>
         <a id="txt" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
             time
@@ -89,8 +85,9 @@ function timeto(){
         <a id="clear" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
             clear all
         </a>
-        <script src="js/test.js"></script>
+        
     </div>
 </div>
+<script src="js/test.js"></script>
 </body>
 </html>

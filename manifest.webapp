@@ -11,8 +11,10 @@
     "url": "http://your-homepage-here.org"
   },
   "messages": [
-    { "alarm": "/index2.html" },
-    { "notification": "/index.html" } 
+    { "alarm": "/index.html" },
+    { "notification": "/index.html" },
+    { "alarm": "/index3.html" },
+    { "notification": "/index3.html" } 
   ],
   "permissions": {
     "alarms": {
