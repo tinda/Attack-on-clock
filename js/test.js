@@ -40,7 +40,7 @@
 
 			var now = new Date();
 			var v = new Date();
-			v.setSeconds(now.getSeconds() + 5);
+			v.setSeconds(now.getSeconds() + 10);
 			var h = now.getHours();
 			var m = now.getMinutes();
 			var s = now.getSeconds();
