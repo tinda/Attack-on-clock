@@ -1,8 +1,8 @@
 {
   "version": "1",
-  "name": "My App",
+  "name": "My firefox app",
   "description": "My elevator pitch goes here",
-  "launch_path": "/index.html",
+  "launch_path": "/index2.html",
   "icons": {
     "128": "/img/128.png"
   },
