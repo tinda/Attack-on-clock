@@ -40,14 +40,29 @@
 
 			var now = new Date();
 			var v = new Date();
-			v.setSeconds(now.getSeconds() + 10);
+			var day = document.querySelector("#select-choice-day");
+			var hours = document.querySelector("#select-choice-hours");
+			var mins = document.querySelector("#select-choice-mins");
+			v.setDate(now.getDate()+1);
+
+			if(day.value=="morning"){
+				v.setHours(hours.value);
+			}else if(day.value=="after"){
+				var hourswakeup = parseInt(hours.value)+12;
+				if(hourswakeup==24){
+					hourswakeup=0;
+				}
+				v.setHours(hourswakeup);
+			}else{
+
+			}
+			v.setMinutes(mins.value);
+			v.setSeconds(now.getSeconds() + 5);
 			var h = now.getHours();
 			var m = now.getMinutes();
 			var s = now.getSeconds();
 
-
 			// var alarmDate = new Date(+new Date() + dt);
-
 			// var alarmDate = new Date(+new Date() );
 
 			if (!navigator.mozAlarms) {
@@ -61,9 +76,7 @@
 			var request = navigator.mozAlarms.add(v, "ignoreTimezone", data);
 
 			request.onsuccess = function() {
-				alert('Alarm set' + v);
-				// document.location.href="index2.html";
-				document.getElementById('t1').innerHTML = h + ":" + m + ":" + s;
+				alert('Alarm set ' + v);
 			};
 
 			request.onerror = function() {

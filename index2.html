@@ -1,108 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <title></title>
-    <style>
-        .queue {
-            margin: 0;
-            padding: 0;
-        }
-        .debug {
-            background: cyan;
-            margin: 1em 0;
-            padding: 5px;
-        }
-    </style>
-  </head>
-  <body>
-    <div class="console"></div>
-    <div class="debug"></div>
-    <ul class="queue"></ul>
-    <button class="add">add</button>
-    <button class="clear">Clear All</button>
-    <script>
-(function() {
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title></title>
+  
+  
+  
+  <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+  
+  <!-- Extra Codiqa features -->
+  <!--<link rel="stylesheet" href="css/codiqa.ext.css">
+  
+  <!-- jQuery and jQuery Mobile -->
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.3.2.min.js"></script>
+  <!-- Extra Codiqa features -->
+  <!--<script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>-->
+  
+</head>
+<script>
+function startTime()
+{
 
-function $(selector) {
-    return [].slice.call(document.querySelectorAll(selector));
+var today=new Date();
+var h=today.getHours();
+var m=today.getMinutes();
+var s=today.getSeconds();
+// add a zero in front of numbers<10
+m=checkTime(m);
+s=checkTime(s);
+document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+t=setTimeout(function(){startTime()},500);
 }
 
-window.addEventListener('keydown', function(e) {
-    if (e.keyCode == 82 && e.metaKey) {
-        window.location.reload();
+function checkTime(i)
+{
+  navigator.mozSetMessageHandler(
+    "alarm",
+    function (msg) {
+        alert(JSON.stringify(msg));
     }
-});
-
-if (!navigator.mozAlarms) {
-    return;
+);
+  
+if (i<10)
+  {
+  i="0" + i;
+  }
+return i;
 }
 
-function getAll() {
-    var reqAlarms = navigator.mozAlarms.getAll();
-    reqAlarms.onsuccess = function (e) {
-        var HTML = '';
-        e.target.result.forEach(function(v, k) {
-            HTML += '<li>' + JSON.stringify(v) + '</li>';
-        });
-        $('.queue')[0].innerHTML = HTML;
-    };
-    reqAlarms.onerror = function (e) {
-        $('.console')[0].innerHTML = e.target.error.name;
-    };
-}
-
-$('.clear')[0].addEventListener('click', function(e) {
-    e.preventDefault();
-
-    var reqClearAlarms = navigator.mozAlarms.getAll();
-    reqClearAlarms.onsuccess = function (e) {
-        e.target.result.forEach(function(v, k) {
-            //if (v.data && v.data.src === 'daddy') {
-                navigator.mozAlarms.remove(v.id);
-            //}
-        });
-        $('.queue')[0].innerHTML = '';
-        $('.console')[0].innerHTML = 'Alarms cleared';
-    };
-    reqClearAlarms.onerror = function (e) {
-        $('.console')[0].innerHTML = e.target.error.name;
-    };
-});
-
-// navigator.mozSetMessageHandler('alarm', function (message) {
-//     console.log('alarm fired:', message);
-//     $('.debug')[0].innerHTML += '<p>alarm fired: ' + JSON.stringify(message) + '</p>';
-// });
-
-navigator.mozSetMessageHandler("alarm", function(mozAlarm) {
-                navigator.vibrate(2000);
-        
-                var notification = navigator.mozNotification.createNotification('There you go', mozAlarm.data.label);
-                    notification.show();
-        
-                });
-
-$('.add')[0].addEventListener('click', function(e) {
-
-var now = new Date();
-var v = new Date();
-v.setSeconds(now.getSeconds() + 5);
-
-var request = navigator.mozAlarms.add(v, 'ignoreTimezone', {src: 'daddy', from: 'cvan'});
-request.onsuccess = function (e) {
-    $('.console')[0].innerHTML = 'Success | ' + JSON.stringify(e.target.result);
-    getAll();
-};
-request.onerror = function (e) {
-    $('.console')[0].innerHTML = 'Errors | ' + e.target.error.name;
-    getAll();
-};
-
-});
-
-})();
-    </script>
-  </body>
+</script>
+<body onload="startTime()" >
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-role="content">
+        <h2 id="t0">
+            2 hello world
+        </h2>
+        <h2 id="t1">
+            t1 hello world
+        </h2>
+        <h2 id="t2">
+            t2 hello world
+        </h2>
+        <h2 id="t3">
+            t3 hello world
+        </h2>
+        <a id="txt" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
+            time
+        </a>
+        <a id="pick-image" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
+            pick-image
+        </a>
+        <a id="check2" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
+            check
+        </a>
+        <a id="test" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
+            test
+        </a>
+        <a id="clear" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
+            clear all
+        </a>
+    </div>
+</div>
+<script src="js/test.js"></script>
+</body>
 </html>
