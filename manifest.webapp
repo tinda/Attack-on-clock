@@ -1,30 +1,29 @@
 {
-  "version": "1",
-  "name": "My App",
-  "description": "My elevator pitch goes here",
+  "name": "WakeUP",
+  "description": "Wake UP, WakeUP !",
   "launch_path": "/index.html",
-  "icons": {
-    "128": "/img/128.png"
-  },
   "developer": {
-    "name": "tinda",
-    "url": "http://your-homepage-here.org"
+    "name": "firefox cen",
+    "url": "https://github.com/tinda/Attack-on-clock"
   },
-  "messages": [
-    { "alarm": "/index.html" },
-    { "notification": "/index.html" },
-    { "alarm": "/index3.html" },
-    { "notification": "/index3.html" } 
-  ],
+  "icons": {
+    "60": "/images/64_clock.png",
+    "128": "/images/128_clock.png"
+  },
   "permissions": {
-    "alarms": {
-        "description": "Required to notify timer's end"
-    },
-    "desktop-notification":{
-        "description": "Required to notify timer's end"
+    "alarms": {}
+  },
+  "locales": {
+    "en-US": {
+      "name": "WakeUP",
+      "description": "Wake UP, WakeUP !"
     }
   },
-  "default_locale": "en"
-  
-  
+  "default_locale": "en-US",
+  "orientation": "portrait-primary",
+  "messages": [
+    {
+      "alarm": "/index.html"
+    }
+  ]
 }

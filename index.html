@@ -1,238 +1,200 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <title></title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Building blocks demo</title>
+    <!-- Building blocks -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
   
+    <!-- Extra Codiqa features -->
+    <!--<link rel="stylesheet" href="css/codiqa.ext.css">
   
-  
-  <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
-  
-  <!-- Extra Codiqa features -->
-  <!--<link rel="stylesheet" href="css/codiqa.ext.css">
-  
-  <!-- jQuery and jQuery Mobile -->
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <!-- jQuery and jQuery Mobile -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.3.2.min.js"></script>
 
-  <!-- Extra Codiqa features -->
-  <!--<script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>-->
-<script>
-window.setTimeout("refresh()", 60000)
+    <link rel="stylesheet" href="css/style/buttons.css">
+    <link rel="stylesheet" href="css/style/confirm.css">
+    <link rel="stylesheet" href="css/style/headers.css">
+    <link rel="stylesheet" href="css/style/input_areas.css">
+    <link rel="stylesheet" href="css/style/status.css">
+    <link rel="stylesheet" href="css/style/switches.css">
+    <link rel="stylesheet" href="css/style_unstable/drawer.css">
+    <link rel="stylesheet" href="css/style_unstable/lists.css">
+    <link rel="stylesheet" href="css/style_unstable/tabs.css">
+    <link rel="stylesheet" href="css/style_unstable/toolbars.css">
 
-function refresh()
-{
-var nowtime = new Date();
-if ((nowtime.getHours() == 12 || nowtime.getHours() == 0) && nowtime.getMinutes() == 0)
-location.reload();
-
-window.setTimeout("refresh()", 60000)
-}
-
-function startTime()
-{
-  var nowtime=new Date();
-  var tomorrowday = nowtime.getDay()+1;
-  var h=nowtime.getHours();
-  var m=nowtime.getMinutes();
-  var s=nowtime.getSeconds();
-// add a zero in front of numbers<10
-  m=checkTime(m);
-  s=checkTime(s);
-  checkTomorrow(tomorrowday);
-  document.getElementById('txt').innerHTML=h+":"+m+":"+s;
-  t=setTimeout(function(){startTime()},500);
-}
-
-function checkTomorrow(i)
-{
-  switch(i){
-    case 0:
-      document.getElementById('tomorrow').innerHTML = "Sunday";
-      break;
-    case 1:
-      document.getElementById('tomorrow').innerHTML = "Monday";
-      break;
-    case 2:
-      document.getElementById('tomorrow').innerHTML = "Tuesday";
-      break;
-    case 3:
-      document.getElementById('tomorrow').innerHTML = "Wednesday";
-      break;
-    case 4:
-      document.getElementById('tomorrow').innerHTML = "Thursday";
-      break;
-    case 5:
-      document.getElementById('tomorrow').innerHTML = "Friday";
-      break;
-    case 6:
-      document.getElementById('tomorrow').innerHTML = "Saturday";
-      break;
-  }
-  
-  navigator.mozSetMessageHandler(
-    "alarm",
-    function (msg) {
-        alert(JSON.stringify(msg));
-      }
-  );
-}
-
-function checkTime(i)
-{ 
-if (i<10)
-  {
-  i="0" + i;
-  }
-return i;
-}
-</script>
-</head>
-
-
-<body onload="startTime()" >
-<!-- Home -->
-<div data-role="page" id="page1">
-    <div data-role="content">
-    <label id="to">
-            明日
-    </label>
-    <label id="tomorrow">
-            time
-    </label>
-    <label id="to">
-            起床時間:
-    </label>
-    <fieldset data-role="controlgroup" data-type="horizontal">
-    <legend>clock</legend>
-    <label for="select-choice-day">上午</label>
-    <select name="select-choice-month" id="select-choice-day">
-      <option value="morning">上午</option>
-      <option value="after">下午</option>
-      <!-- etc. -->
-    </select>
- 
-    <label for="select-choice-hours">hours</label>
-    <select name="select-choice-day" id="select-choice-hours">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <!-- etc. -->
-    </select>
- 
-    <label for="select-choice-mins">min</label>
-    <select name="select-choice-year" id="select-choice-mins">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="24">24</option>
-      <option value="25">25</option>
-      <option value="26">26</option>
-      <option value="27">27</option>
-      <option value="28">28</option>
-      <option value="29">29</option>
-      <option value="30">30</option>
-      <option value="31">31</option>
-      <option value="32">32</option>
-      <option value="33">33</option>
-      <option value="34">34</option>
-      <option value="35">35</option>
-      <option value="36">36</option>
-      <option value="37">37</option>
-      <option value="38">38</option>
-      <option value="39">39</option>
-      <option value="40">40</option>
-      <option value="41">41</option>
-      <option value="42">42</option>
-      <option value="43">43</option>
-      <option value="44">44</option>
-      <option value="45">45</option>
-      <option value="46">46</option>
-      <option value="47">47</option>
-      <option value="48">48</option>
-      <option value="49">49</option>
-      <option value="50">50</option>
-      <option value="51">51</option>
-      <option value="52">52</option>
-      <option value="53">53</option>
-      <option value="54">54</option>
-      <option value="55">55</option>
-      <option value="56">56</option>
-      <option value="57">57</option>
-      <option value="58">58</option>
-      <option value="59">59</option>
-      <!-- etc. --> 
-    </select>
-  </fieldset>
-  <fieldset data-role="controlgroup" data-type="horizontal">
-     <a id="check" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
-            保存
-      </a>
-      <a id="close" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
-            關閉
-      </a>
-  </fieldset>
-
-        <a id="test" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
-            檢查
-        </a>
-        <a id="clear" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
-            清除
-        </a>
-        <a id="other" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
-            檢查每一天起床的鬧鐘時間
-        </a>
-        <a id="txt" data-role="button" href="#page1" data-icon="star" data-iconpos="left">
-            檢查每一天起床的鬧鐘時間
-        </a>
-
-        <h2 id="t0">
-            t0 hello world
-        </h2>
-        <h2 id="t1">
-            t1 hello world
-        </h2>
-        <h2 id="t2">
-            t2 hello world
-        </h2>
-        <h2 id="t3">
-            t3 hello world
-        </h2>
-        
-    </div>
-</div>
-<script src="js/test.js"></script>
-</body>
+    <!-- Transitions -->
+    <link rel="stylesheet" href="css/transitions.css">
+    <!-- Util CSS: some extra tricks -->
+    <link rel="stylesheet" href="css/util.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <!-- Additional markup to make Building Blocks kind of cross browser -->
+    <link rel="stylesheet" href="css/cross_browser.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <section id="tabs" data-position="current">
+      <section role="region">
+        <article class="content scrollable">
+          <ul role="tablist" data-items="2" class="bottom">
+            <li id="panel1" role="tab" aria-selected="true">
+              <a href="#panel1">Alarm</a>
+              <div role="tabpanel">
+                <div id="clock-container">
+                  <div id="date-text"></div>
+                  <div id="alarm-new"></div>
+                  <canvas id="ca"></canvas>
+                </div>
+                <div id="actions-container">
+                  <button id="show-alarms" class="recommend" disabled>Show alarms</button>
+                </div>
+              </div>
+            </li>
+            <li id="panel2" role="tab">
+              <a href="#panel2">Stopwatch</a>
+              <div role="tabpanel">
+                <p id="stopwatch-time">
+                  <span id="stopwatch-min">00</span>:<span id="stopwatch-sec">00</span>
+                </p>
+                <menu>
+                  <button id="stopwatch-start">Start</button>
+                  <button id="stopwatch-reset" class="danger" disabled>Reset</button>
+                </menu>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </section>
+    <section id="alarm-new-details" role="region" data-position="right" data-transition="push">
+      <header class="fixed">
+        <button id="alarm-new-details-back">
+          <span class="icon icon-close">close</span>
+        </button>
+        <menu type="toolbar">
+          <button id="alarm-new-details-done">Done</button>
+        </menu>
+        <h1>New alarm</h1>
+      </header>
+      <article class="content scrollable header">
+        <header>
+          <h2>Name</h2>
+        </header>
+        <form>
+          <p>
+            <input id="name" type="text" placeholder="Type a name...">
+            <button type="reset">Clear</button>
+          </p>
+        </form>
+        <header>
+          <h2>Time</h2>
+        </header>
+        <form>
+          <ul>
+            <li class="time-selector">
+              <button class="icon icon-dialog"></button>
+              <input id="time" type="time" />
+            </li>
+          </ul>
+        </form>
+        <header>
+          <h2>Sound</h2>
+        </header>
+        <form>
+          <ul>
+            <li class="value-selector">
+              <select id='tone'>
+                <option selected>None</option>
+                <option value="fart-01.mp3">Fart</option>
+                <option value="machine-gun-01.mp3">Gun fire</option>
+                <option value="button-2.mp3">Laser 1</option>
+                <option value="button-8.mp3">Laser 2</option>
+                <option value="p_o_l_i_c_e.mp3">Police</option>
+                <option value="train-whistle-01.mp3">Train</option>
+              </select>
+              <button id="tone-button" class="icon icon-dialog">None</button>
+            </li>
+          </ul>
+        </form>
+        <header>
+          <h2>Vibration</h2>
+        </header>
+        <form>
+          <ul>
+            <li class="value-selector">
+              <select id="vibration">
+                <option value="true" selected>Activated</option>
+                <option value="false">Deactivated</option>
+              </select>
+              <button id="vibration-button" class="icon icon-dialog">Activated</button>
+            </li>
+          </ul>
+        </form>
+      </article>
+    </section>
+    <section id="alarm-list" role="region" data-position="right" data-transition="push">
+      <header class="fixed">
+        <button id="alarm-list-back">
+          <span class="icon icon-close">close</span>
+        </button>
+        <menu type="toolbar">
+          <button id="alarm-list-remove">Remove</button>
+        </menu>
+        <h1>My alarms</h1>
+      </header>
+      <article class="content scrollable header">
+        <section data-type="list">
+          <ul>
+<!--
+            <li>
+              <p>
+                <label class="pack-checkbox">
+                  <input type="checkbox" checked>
+                  <span></span>
+                </label>
+                Alarm 1
+              </p>
+            </li>
+-->
+          </ul>
+        </section>
+      </article>
+    </section>
+    <form id="ring"  role="dialog" data-type="confirm" data-position="back" data-transition="fade">
+      <section id="question-section">
+        <h3 id="question-title">question</h3>
+        <input name='question' type=radio id="1" value='op1'><label id="op1">Option1</label><br />
+        <input name='question' type=radio id="2" value='op2'><label id="op2">Option2</label><br />
+        <input name='question' type=radio id="3" value='op3'><label id="op3">Option3</label><br />
+        <button id="ring-question-submit">submit</button>
+        <p>
+          <img src="css/images/onring.png" alt="Lightbox Icon" width="55" height="55">
+          <strong id="ring-time"></strong>
+          <small id="ring-text"></small>
+        </p>
+      </section>
+      <menu>
+        <button id="ring-close" disabled>Close</button>
+        <button id="ring-snooze"class="recommend">Snooze</button>
+      </menu>
+    </form>
+    <section>
+      <audio src="media/button-2.mp3" preload="auto"></audio>
+      <audio src="media/button-8.mp3" preload="auto"></audio>
+      <audio src="media/fart-01.mp3" preload="auto"></audio>
+      <audio src="media/machine-gun-01.mp3" preload="auto"></audio>
+      <audio src="media/p_o_l_i_c_e.mp3" preload="auto"></audio>
+      <audio src="media/train-whistle-01.mp3" preload="auto"></audio>
+    </section>
+    <script type="text/javascript" src="js/status.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+    <script type="text/javascript" src="js/clock.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/alarms.js"></script>
+    <script type="text/javascript" src="js/alarmsHelper.js"></script>
+    <script type="text/javascript" src="js/alarmsList.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
 </html>

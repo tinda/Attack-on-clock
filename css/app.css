@@ -1,0 +1,385 @@
+/*
+Taken from the Building Blocks demo app. Please visit
+  https://marketplace.firefox.com/app/building-blocks and its source code at
+  https://github.com/buildingfirefoxos/Building-Blocks/blob/gh-pages/app.html#L40 .
+*/
+
+[data-position="current"] {
+  height: 100%;
+}
+
+section[role="region"] {
+  position: fixed;
+  overflow-x: hidden;
+}
+
+[data-position="right"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+/*
+  z-index: 15;
+  z-index: 100;
+*/
+  /* -> drawer */
+}
+
+section[role="region"][data-position="right"] {
+  position: fixed;
+}
+
+[data-position="back"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+  /* z-index: 100; -> drawer */
+}
+
+form[role="dialog"][data-type="confirm"] {
+  pointer-events: none;
+}
+
+form[role="dialog"][data-type="confirm"].fadeIn {
+  pointer-events: auto;
+}
+
+[data-position="edit-mode"] {
+  position: absolute;
+  top: -5rem;
+  left: 0;
+  right: 0;
+  bottom: -7rem;
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+[data-position="edit-mode"].edit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+/*  z-index: 120;*/
+  opacity: 1;
+}
+
+/* Page navigation */
+
+.moveLeftIn {
+  animation: moveLeftIn 0.4s forwards;
+  -webkit-animation: moveLeftIn 0.4s forwards;
+}
+
+.moveLeftOut {
+  animation: moveLeftOut 0.4s forwards;
+  -webkit-animation: moveLeftOut 0.4s forwards;
+}
+
+.moveRightIn {
+  animation: moveRightIn 0.4s forwards;
+  -webkit-animation: moveRightIn 0.4s forwards;
+}
+
+.moveRightOut {
+  animation: moveRightOut 0.4s forwards;
+  -webkit-animation: moveRightOut 0.4s forwards;
+}
+
+.fadeIn {
+/*  z-index: 120;*/
+  animation: fadeIn 0.2s forwards;
+  -webkit-animation: fadeIn 0.2s forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.2s forwards;
+  -webkit-animation: fadeOut 0.2s forwards;
+}
+
+/* Headers */
+ #headers section[role="region"] {
+  margin-bottom: 1.5rem;
+}
+
+#headers section[role="region"]:not(#drawer) {
+  display: inline;
+}
+
+#headers article header:first-child {
+  margin-top: 1.5rem;
+}
+
+#headers section[role="region"] header h2 {
+  margin: 0 0 1.5rem 0;
+}
+
+/* Fix margins (overwrite util.css) */
+section[role="region"] > .content:not(.scrollable) {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+section[role="region"] > .content header h2 {
+  margin: 3rem -1.5rem 1.5rem -1.5rem;
+}
+
+/* Lists */
+
+/* to avoid double background effect on press */
+[data-type=list] li>a:active {
+  background-color: transparent;
+}
+
+/* Drawer */
+ section[role="region"]:not(#drawer) {
+  transition: none;
+  left: 0;
+/*  z-index: 0;*/
+  padding-left: 0;
+}
+
+/*section[role="region"]:not(#drawer) > header:first-child {
+      margin-left: 0;
+    }
+    section[role="region"]:not(#drawer) > header:first-child h1 {
+      margin-left: 3rem;
+    }
+    section[role="region"]#drawer > header:first-child h1 {
+      margin-left: 4.5rem;
+    }
+    section[role="region"]:not(#drawer) > header:first-child > a {
+      width: 5rem;
+    }
+    section[role="region"]#drawer > header:first-child > a .icon {
+      width: 3.5rem;
+
+}*/
+
+section[data-type="sidebar"] + section[role="region"] > header:first-child > button, section[data-type="sidebar"] + section[role="region"] > header:first-child > a {
+  background-position: 3.5rem center;
+}
+
+/* section[role="region"]:not(#drawer) > header:first-child > a .icon:after {
+      width: 2rem;
+    }
+    section[role="region"]#drawer > header:first-child > a .icon:after {
+      width: 3.5rem;
+    }*/
+
+/* Switches */
+ #switches label:last-child {
+  margin-left: 2rem;
+}
+
+/* Scrolling */
+ nav[data-type="scrollbar"] {
+  padding-top: 1rem;
+}
+
+nav[data-type="scrollbar"] p {
+  opacity: 1;
+}
+
+/* Seek bars */
+ div[role="slider"] > label.icon {
+  background: no-repeat right top;
+  background-size: 3rem auto;
+}
+
+/* Status */
+section[role="status"] {
+  position: fixed;
+}
+
+
+/* Tabs */
+ #tabs .content {
+  padding: 0;
+}
+
+#tabs .content .content {
+  padding: 1.5rem 3rem;
+}
+
+/* Filters */
+[role="tablist"][data-type="filter"] {
+  margin-bottom: 2rem;
+}
+
+.bottom[role="tablist"][data-type="filter"] {
+  bottom: auto;
+}
+
+/* Device rotation */
+ .landscape section[role="region"]#drawer > header:first-child {
+  background: green;
+}
+
+/* Clock */
+#clock-container {
+  margin-top: 7rem;
+  margin-left: calc((100% - 25rem) / 2);
+  margin-left: -webkit-calc((100% - 25rem) / 2);
+  width: 25rem;
+  height: 25rem;
+}
+
+#date-text {
+  position: absolute;
+  height: 2.5rem;
+  width: calc(100% - 7.7rem);
+  width: -webkit-calc(100% - 7.7rem);
+  border: none;
+  top: 0;
+  left: 1.5rem;
+  margin-top: 2.3rem;
+  overflow: hidden;
+  color: #00acce;
+}
+
+#alarm-new {
+  position: absolute;
+  background: url(images/add_alarm.png) no-repeat center / 3.2rem;
+  background-size: 100% auto;
+  height: 5rem;
+  width: 3.2rem;
+  border: none;
+  top: 0;
+  right: 0;
+  margin-top: .9rem;
+  margin-right: 1.5rem;
+}
+
+#tone-button, #vibration-button {
+  font-weight: 400;
+}
+
+#actions-container {
+  width: 100%;
+  height: 9rem;
+}
+
+#show-alarms {
+  top: 3rem;
+  margin: 0 3rem 0 3rem;
+  width: calc(100% - 6rem);
+  width: -webkit-calc(100% - 6rem);
+  text-align: center;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.time-selector {
+  position: relative;
+}
+
+.time-selector button {
+  pointer-events: none;
+}
+
+.time-selector input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 3.8rem;
+  line-height: 4rem;
+  border: none;
+  background: transparent;
+  font-size: 1.6rem;
+  padding: 0 1.5rem;
+}
+
+.value-selector {
+  position: relative;
+}
+
+.value-selector button {
+  pointer-events: none;
+}
+
+.value-selector select {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 3.8rem;
+  line-height: 4rem;
+  border: none;
+  background: transparent;
+  font-size: 1.6rem;
+  padding: 0 1.5rem;
+}
+
+.value-selector select option {
+  height: 3.8rem;
+  padding-top: 1rem;
+}
+
+[role="tabpanel"] p {
+  font-size: 10rem;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  display: -moz-box;
+  -moz-box-pack: center;
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  display: box;
+  box-pack: center;
+}
+
+#panel2 menu {
+  margin-right: 5rem;
+}
+
+#panel2 button {
+  width: 100%;
+  text-align: center;
+}
+
+#ring img {
+  width: 12.4rem;
+  height: 5.5rem;
+}
+
+#alarm-list ul > li > * {
+  pointer-events: none;
+}
+
+@media (min-width: 360px) {
+  [role="tablist"] > [role="tab"] > a {
+    font-size: 2rem;
+    line-height: 4.7rem;
+  }
+
+  button, a[role="button"], .button {
+    height: 4rem;
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+
+  form[role="dialog"][data-type="confirm"] h1 {
+    font-size: 3rem;
+  }
+
+  #date-text {
+    font-size: 2.6rem;
+  }
+
+  #time {
+    width: 150%;
+  }
+}
