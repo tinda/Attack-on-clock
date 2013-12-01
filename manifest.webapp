@@ -7,8 +7,8 @@
     "url": "https://github.com/tinda/Attack-on-clock"
   },
   "icons": {
-    "60": "/images/64_clock.png",
-    "128": "/images/128_clock.png"
+    "60": "/images/64.jpg",
+    "128": "/images/128.jpg"
   },
   "permissions": {
     "alarms": {}
