@@ -151,6 +151,7 @@ var AlarmsHelper = (function() {
 			rightcounter = rightcounter+1;
 			if(rightcounter>=3){
 				document.getElementById('ring-close').removeAttribute('disabled');
+                document.getElementById('ring-snooze').removeAttribute('disabled');
 			}
 			break;
         }else{
